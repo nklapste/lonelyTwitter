@@ -78,7 +78,7 @@ public class LonelyTwitterActivity extends Activity {
 	private void saveInFile(String text, Date date) {
 		try {
 		    FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND);
-			fos.write(new String(date.toString() + " | " + text + "\n").getBytes());
+			fos.write((date.toString() + " | " + text).getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
