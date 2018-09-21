@@ -77,14 +77,8 @@ public class LonelyTwitterActivity extends Activity {
 	
 	private void saveInFile(String text, Date date) {
 		try {
-
-		    NormalTweet myTweet = new NormalTweet("");
-		    myTweet.setMessage("I am looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong message");
-
-		    FileOutputStream fos = openFileOutput(FILENAME,
-					Context.MODE_APPEND);
-			fos.write(new String(date.toString() + " | " + text)
-					.getBytes());
+		    FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND);
+			fos.write(new String(date.toString() + " | " + text + "\n").getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -93,8 +87,5 @@ public class LonelyTwitterActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (TweetTooLongException e) {
-            e.printStackTrace();
-        }
 	}
 }
