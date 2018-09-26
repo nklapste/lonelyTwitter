@@ -32,6 +32,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		bodyText = (EditText) findViewById(R.id.body);
 		Button saveButton = (Button) findViewById(R.id.save);
+		Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +43,12 @@ public class LonelyTwitterActivity extends Activity {
 				saveInFile(text, new Date(System.currentTimeMillis()));
 				finish();
 
+			}
+		});
+
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				// TODO: clear displayed tweets and clear tweets on disk
 			}
 		});
 	}
