@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -22,11 +23,17 @@ public class LonelyTwitterActivity extends Activity {
 		final EditText bodyText = (EditText) findViewById(R.id.body);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+		final CheckBox importantCheckBox = (CheckBox) findViewById(R.id.importantCheckBox);
 		final Button saveButton = (Button) findViewById(R.id.save);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				String text = bodyText.getText().toString();
-                Tweet tweet = new ImportantTweet(text);
+				Tweet tweet;
+				if (importantCheckBox.isChecked()){
+					tweet = new ImportantTweet(text);
+				} else {
+					tweet = new NormalTweet(text);
+				}
                 mTweetList.add(tweet);
                 mTweetAdapter.notifyDataSetChanged();
 				LonelyTwitterPreferencesManager.saveSharedPreferencesTweetList(
