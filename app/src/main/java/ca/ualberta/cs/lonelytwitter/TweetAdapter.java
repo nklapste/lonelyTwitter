@@ -10,18 +10,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * RecyclerView adapter for integrating a {@code FeelQueue}.
+ * Tweet adapter for integrating a {@code TweetList}.
  */
 class TweetAdapter extends ArrayAdapter<Tweet> {
     private static final String TAG = "TweetAdapter";
 
-    TweetAdapter(Context context, ArrayList<Tweet> tweets) {
+    TweetAdapter(Context context, TweetList tweets) {
         super(context, 0, tweets);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         // Get the data item for this position
         Tweet tweet = getItem(position);
 
@@ -30,15 +29,9 @@ class TweetAdapter extends ArrayAdapter<Tweet> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        // Lookup view for data population
-
+        // set the message of the tweet
         TextView tweetMessage = (TextView) convertView.findViewById(R.id.tweet_message);
-
-        // Populate the data into the template view using the data object
         tweetMessage.setText(tweet.getMessage());
-        // Return the completed view to render on screen
-
         return convertView;
-
     }
 }
