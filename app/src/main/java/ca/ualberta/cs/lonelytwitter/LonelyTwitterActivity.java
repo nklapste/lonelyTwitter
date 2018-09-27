@@ -2,13 +2,17 @@ package ca.ualberta.cs.lonelytwitter;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class LonelyTwitterActivity extends Activity {
+	private static final String TAG = "LonelyTwitterActivity";
+
 	private ListView oldTweetsList;
     private TweetAdapter mTweetAdapter;
 	private TweetList mTweetList;
@@ -30,11 +34,21 @@ public class LonelyTwitterActivity extends Activity {
 				String text = bodyText.getText().toString();
 				Tweet tweet;
 				if (importantCheckBox.isChecked()){
-					tweet = new ImportantTweet(text);
+					tweet = new ImportantTweet();
 				} else {
-					tweet = new NormalTweet(text);
+					tweet = new NormalTweet();
 				}
-                mTweetList.add(tweet);
+				try {
+					tweet.setMessage(text);
+				} catch (TweetTooLongException e) {
+					Log.e(TAG, "Tweet's message is to long", e);
+					Toast.makeText(
+							getApplicationContext(),
+							"Tweet's message is to long",
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+				mTweetList.add(tweet);
                 mTweetAdapter.notifyDataSetChanged();
 				LonelyTwitterPreferencesManager.saveSharedPreferencesTweetList(
 						getApplicationContext(),
