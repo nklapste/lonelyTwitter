@@ -26,7 +26,7 @@ public class LonelyTwitterActivity extends Activity {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				String text = bodyText.getText().toString();
-                NormalTweet tweet = new NormalTweet(text);
+                Tweet tweet = new ImportantTweet(text);
                 mTweetList.add(tweet);
                 mTweetAdapter.notifyDataSetChanged();
 				LonelyTwitterPreferencesManager.saveSharedPreferencesTweetList(
