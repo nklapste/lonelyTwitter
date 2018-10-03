@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 
 
 /**
- * Add-in to allow JSON Serializing of subclasses of Tweet.
+ * Add-in to allow JSON Serializing of the abstract class Tweet and its subclasses.
  */
 public class TweetSerializer implements JsonSerializer<Tweet>, JsonDeserializer<Tweet> {
     private static final String TAG = "TweetSerializer";
@@ -15,7 +15,6 @@ public class TweetSerializer implements JsonSerializer<Tweet>, JsonDeserializer<
         JsonObject result = new JsonObject();
         result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
         result.add("properties", context.serialize(src, src.getClass()));
-
         return result;
     }
 
