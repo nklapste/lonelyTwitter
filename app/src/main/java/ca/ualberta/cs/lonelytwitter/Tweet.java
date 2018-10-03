@@ -2,20 +2,27 @@ package ca.ualberta.cs.lonelytwitter;
 
 import java.util.Date;
 
-public abstract class Tweet implements Tweetable {
-
+/**
+ * Abstract class denoting a lonelytwitter tweet.
+ * <p>
+ * Note: I absorbed the interface Tweetable into Tweet as It seemed irrelevant.
+ */
+public abstract class Tweet {
+    private static final String TAG = "Tweet";
+    private static final Integer MAX_CHARS = 140;
     private Date date;
     private String message;
-    private static final Integer MAX_CHARS = 140;
 
-    //Empty argument constructor with default values
     Tweet() {
-        //Must use the 'this' keyword in order to specify the current object message = message does nothing!
         this.date = new Date();
         this.message = "I am default message schwa!";
     }
 
-    //Overloading: so that we can specify the tweet content
+    /**
+     * Construct a tweet with a preset message.
+     *
+     * @param message {@code String}
+     */
     Tweet(String message) {
         this.date = new Date();
         this.message = message;
@@ -25,15 +32,21 @@ public abstract class Tweet implements Tweetable {
         return this.message;
     }
 
+    /**
+     * @param message
+     * @throws TweetTooLongException if the Tweet's message is over {@code MAX_CHARS}
+     */
     public void setMessage(String message) throws TweetTooLongException {
-        if (message.length() <= this.MAX_CHARS ) {
+        if (message.length() <= this.MAX_CHARS) {
             this.message = message;
         } else {
             throw new TweetTooLongException();
         }
     }
 
-    public Date getDate() { return this.date; }
+    public Date getDate() {
+        return this.date;
+    }
 
     //No method body implemented! We leave that up to the subclasses (they MUST implement it)
     public abstract Boolean isImportant();

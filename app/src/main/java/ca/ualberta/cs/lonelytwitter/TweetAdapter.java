@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 /**
  * {@code ArrayAdapter} for integrating a {@code TweetList}.
+ *
+ * @see Tweet
  */
 class TweetAdapter extends ArrayAdapter<Tweet> {
     private static final String TAG = "TweetAdapter";

@@ -10,7 +10,8 @@ import com.google.gson.GsonBuilder;
 /**
  * Helper Class for accessing the  Android's SharedPreferences for use in LonelyTwitter.
  *
- * Use {@code Gson} to serialize/deserialize
+ * @see TweetSerializer
+ * Use {@code Gson} to serialize/deserialize.
  */
 public class LonelyTwitterPreferencesManager {
     private static final String TAG = "LonelyTwitterPreferencesManager";
@@ -21,7 +22,7 @@ public class LonelyTwitterPreferencesManager {
     /**
      * Save a TweetList using Android's SharedPreferences.
      *
-     * @param context  {@code Context}
+     * @param context   {@code Context}
      * @param tweetList {@code TweetList}
      */
     public static void saveSharedPreferencesTweetList(Context context, TweetList tweetList) {
