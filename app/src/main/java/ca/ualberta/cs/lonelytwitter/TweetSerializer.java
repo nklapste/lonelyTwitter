@@ -13,9 +13,13 @@ import java.lang.reflect.Type;
 
 
 /**
- * Add-in to allow JSON Serializing of the abstract class Tweet and its subclasses.
+ * Add-in to allow GSON/JSON Serializing of the abstract class Tweet and its subclasses.
+ *
+ * @see LonelyTwitterPreferencesManager uses this to properly (de)serialize {@code TweetList}s.
+ * @see com.google.gson.JsonDeserializer
+ * @see com.google.gson.JsonSerializer
  */
-public class TweetSerializer implements JsonSerializer<Tweet>, JsonDeserializer<Tweet> {
+class TweetSerializer implements JsonSerializer<Tweet>, JsonDeserializer<Tweet> {
     private static final String TAG = "TweetSerializer";
 
     @Override
