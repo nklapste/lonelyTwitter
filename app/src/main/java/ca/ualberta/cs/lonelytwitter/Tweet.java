@@ -23,11 +23,13 @@ public abstract class Tweet {
     }
 
     /**
-     * @param message
+     * Set a Tweets message.
+     *
+     * @param message {@code String} the message to be set to the {@code Tweet}.
      * @throws TweetTooLongException if the Tweet's message is over {@code MAX_CHARS}
      */
     public void setMessage(String message) throws TweetTooLongException {
-        if (message.length() <= this.MAX_CHARS) {
+        if (message.length() <= MAX_CHARS) {
             this.message = message;
         } else {
             throw new TweetTooLongException();
