@@ -1,5 +1,6 @@
 package ca.ualberta.cs.lonelytwitter;
 
+
 /**
  * A Exception denoting that a {@code Tweet}s message is too long.
  */
