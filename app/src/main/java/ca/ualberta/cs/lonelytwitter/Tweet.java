@@ -15,17 +15,7 @@ public abstract class Tweet {
 
     Tweet() {
         this.date = new Date();
-        this.message = "I am default message schwa!";
-    }
-
-    /**
-     * Construct a tweet with a preset message.
-     *
-     * @param message {@code String}
-     */
-    Tweet(String message) {
-        this.date = new Date();
-        this.message = message;
+        this.message = "";
     }
 
     public String getMessage() {

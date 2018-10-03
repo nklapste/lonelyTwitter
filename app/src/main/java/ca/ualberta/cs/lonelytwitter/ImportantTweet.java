@@ -16,10 +16,6 @@ public class ImportantTweet extends Tweet {
         super();
     }
 
-    ImportantTweet(String message) {
-        super(message);
-    }
-
     @Override
     public Boolean isImportant() {
         return true;
