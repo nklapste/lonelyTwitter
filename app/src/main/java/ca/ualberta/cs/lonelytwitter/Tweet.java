@@ -2,10 +2,11 @@ package ca.ualberta.cs.lonelytwitter;
 
 import java.util.Date;
 
+
 /**
- * Abstract class denoting a lonelytwitter tweet.
+ * Abstract class denoting a LonelyTwitter tweet.
  * <p>
- * Note: I absorbed the interface Tweetable into Tweet as It seemed irrelevant.
+ * Note: I absorbed the interface {@code Tweetable} into {@code Tweet} as It seemed irrelevant.
  */
 public abstract class Tweet {
     private static final String TAG = "Tweet";
@@ -13,11 +14,21 @@ public abstract class Tweet {
     private Date date;
     private String message;
 
+    /**
+     * Construct a {@code Tweet} with a default message of an empty string ``""``.
+     * <p>
+     * To set the message of a {@code Tweet} use the {@code setMessage} method.
+     */
     Tweet() {
         this.date = new Date();
         this.message = "";
     }
 
+    /**
+     * Return the message of the {@code Tweet}.
+     *
+     * @return {@code String} the message of the {@code Tweet}.
+     */
     public String getMessage() {
         return this.message;
     }
@@ -36,10 +47,19 @@ public abstract class Tweet {
         }
     }
 
+    /**
+     * Returns the date the {@code Tweet} was created.
+     *
+     * @return {@code Date} The date the tweet was created.
+     */
     public Date getDate() {
         return this.date;
     }
 
-    //No method body implemented! We leave that up to the subclasses (they MUST implement it)
+    /**
+     * Abstract Getter-like method denoting whether a {@code Tweet} is important or not.
+     *
+     * @return {@code Boolean} indicating whether the Tweet is important or not.
+     */
     public abstract Boolean isImportant();
 }

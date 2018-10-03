@@ -23,13 +23,12 @@ class TweetSerializer implements JsonSerializer<Tweet>, JsonDeserializer<Tweet> 
     /**
      * Serialize an {@code Tweet} and consider additional class attributes such as type and properties.
      *
+     * @param tweet     {@code Tweet}
+     * @param typeOfSrc {@code Type}
+     * @param context   {@code JsonSerializationContext}
+     * @return {@code JsonElement}
      * @see Tweet
      * @see com.google.gson.JsonSerializer
-     *
-     * @param tweet {@code Tweet}
-     * @param typeOfSrc {@code Type}
-     * @param context {@code JsonSerializationContext}
-     * @return {@code JsonElement}
      */
     @Override
     public JsonElement serialize(Tweet tweet, Type typeOfSrc, JsonSerializationContext context) {
@@ -43,14 +42,13 @@ class TweetSerializer implements JsonSerializer<Tweet>, JsonDeserializer<Tweet> 
      * Deserialize a JsonElement considering additional class attributes such as
      * type and properties.
      *
-     * @see Tweet
-     * @see com.google.gson.JsonDeserializer
-     *
-     * @param json {@code JsonElement}
+     * @param json    {@code JsonElement}
      * @param typeOfT {@code Type}
      * @param context {@code JsonDeserializationContext}
      * @return {@code Tweet} or a respective subclass of {@code Tweet}.
      * @throws JsonParseException if the class specified by the deserializer does not exist or is unknown.
+     * @see Tweet
+     * @see com.google.gson.JsonDeserializer
      */
     @Override
     public Tweet deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
