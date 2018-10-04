@@ -20,6 +20,15 @@ class TweetAdapter extends ArrayAdapter<Tweet> {
         super(context, 0, tweets);
     }
 
+    /**
+     * Get the view of a tweet item. Obtain the {@code Tweet} stored at a position and set
+     * the tweetMessage TextView text with the {@code Tweet}s message.
+     *
+     * @param position {@code int}
+     * @param convertView {@code View}
+     * @param parent {@code ViewGroup}
+     * @return {@code View}
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the Tweet item for this position

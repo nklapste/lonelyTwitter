@@ -15,7 +15,7 @@ public abstract class Tweet {
     private String message;
 
     /**
-     * Construct a {@code Tweet} with a default message of an empty string ``""``.
+     * Construct a {@code Tweet} with a default message of an empty string {@code ""}.
      * <p>
      * To set the message of a {@code Tweet} use the {@code setMessage} method.
      */
