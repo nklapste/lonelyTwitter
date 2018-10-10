@@ -7,7 +7,12 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 /**
  * Created by romansky on 10/20/16.
@@ -27,17 +32,24 @@ public class ElasticsearchTweetController {
     }
 
     // TODO we need a function which gets tweets from elastic search
-/*    public static class GetTweetsTask extends AsyncTask<String, Void, ArrayList<NormalTweet>> {
+    public static class GetTweetsTask extends AsyncTask<String, Void, ArrayList<Tweet>> {
         @Override
-        protected ArrayList<NormalTweet> doInBackground(String... search_parameters) {
+        protected ArrayList<Tweet> doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
-
-                // TODO Build the query
+            ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+            Search.Builder search = new Search.Builder(search_parameters[search_parameters.length-1]);
+                    // TODO Build the query
 
             try {
+                SearchResult elasticRs = client.execute(search.build());
                // TODO get the results of the query
+                List<SearchResult.Hit<Tweet, Void>> hits = elasticRs.getHits(Tweet.class);
+                for (SearchResult.Hit<Tweet, Void> hit : hits) {
+                    Tweet tweet = hit.source;
+                    System.out.println("Elastic hits: " + tweet.getMessage());
+                }
+
             }
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
@@ -45,7 +57,7 @@ public class ElasticsearchTweetController {
 
             return tweets;
         }
-    }*/
+    }
 
     // TODO we need a function which adds tweets to elastic search
     public static class AddTweetsTask extends AsyncTask<NormalTweet, Void, Void> {

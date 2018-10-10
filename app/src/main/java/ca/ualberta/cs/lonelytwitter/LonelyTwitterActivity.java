@@ -9,16 +9,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class LonelyTwitterActivity extends Activity {
@@ -29,7 +24,6 @@ public class LonelyTwitterActivity extends Activity {
     private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
     private ArrayAdapter<Tweet> adapter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +31,7 @@ public class LonelyTwitterActivity extends Activity {
 
         bodyText = (EditText) findViewById(R.id.body);
         Button saveButton = (Button) findViewById(R.id.save);
-        Button clearButton = (Button) findViewById(R.id.clear);
+        Button searchButton = (Button) findViewById(R.id.search);
         oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -52,12 +46,12 @@ public class LonelyTwitterActivity extends Activity {
             }
         });
 
-        clearButton.setOnClickListener(new View.OnClickListener() {
-
+        // TODO: update to search functionality
+        searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setResult(RESULT_OK);
                 tweetList.clear();
-                deleteFile(FILENAME);  // TODO deprecate this button
+                tweetList = new ElasticsearchTweetController.GetTweetsTask().doInBackground(bodyText.getText().toString());
+                setResult(RESULT_OK);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -69,27 +63,10 @@ public class LonelyTwitterActivity extends Activity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        loadFromFile(); // TODO replace this with elastic search
-        adapter = new ArrayAdapter<Tweet>(this,
-                R.layout.list_item, tweetList);
+        tweetList = new ElasticsearchTweetController.GetTweetsTask().doInBackground("123");
+        adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweetList);
         oldTweetsList.setAdapter(adapter);
     }
-
-    private void loadFromFile() {
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            //Code taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt Sept.22,2016
-            Type listType = new TypeToken<ArrayList<NormalTweet>>() {
-            }.getType();
-            tweetList = gson.fromJson(in, listType);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            tweetList = new ArrayList<Tweet>();
-        }
-    }
-
 
     private void saveInFile() {
         try {
