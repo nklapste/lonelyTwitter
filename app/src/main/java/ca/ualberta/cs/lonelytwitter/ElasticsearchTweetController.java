@@ -15,25 +15,14 @@ import io.searchbox.core.Index;
 public class ElasticsearchTweetController {
     private static JestDroidClient client;
 
-    // TODO we need a function which adds tweets to elastic search
-    public static class AddTweetsTask extends AsyncTask<NormalTweet, Void, Void> {
+    public static void verifySettings() {
+        if (client == null) {
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+            DroidClientConfig config = builder.build();
 
-        @Override
-        protected Void doInBackground(NormalTweet... tweets) {
-            //verifySettings();
-
-            for (NormalTweet tweet : tweets) {
-                Index index = new Index.Builder(tweet).index("testing").type("tweet").build();
-
-                try {
-                    // where is the client?
-                }
-                catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the tweets");
-                }
-
-            }
-            return null;
+            JestClientFactory factory = new JestClientFactory();
+            factory.setDroidClientConfig(config);
+            client = (JestDroidClient) factory.getObject();
         }
     }
 
@@ -58,17 +47,24 @@ public class ElasticsearchTweetController {
         }
     }*/
 
+    // TODO we need a function which adds tweets to elastic search
+    public static class AddTweetsTask extends AsyncTask<NormalTweet, Void, Void> {
 
+        @Override
+        protected Void doInBackground(NormalTweet... tweets) {
+            //verifySettings();
 
+            for (NormalTweet tweet : tweets) {
+                Index index = new Index.Builder(tweet).index("testing").type("tweet").build();
 
-    public static void verifySettings() {
-        if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
-            DroidClientConfig config = builder.build();
+                try {
+                    // where is the client?
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the tweets");
+                }
 
-            JestClientFactory factory = new JestClientFactory();
-            factory.setDroidClientConfig(config);
-            client = (JestDroidClient) factory.getObject();
+            }
+            return null;
         }
     }
 }
