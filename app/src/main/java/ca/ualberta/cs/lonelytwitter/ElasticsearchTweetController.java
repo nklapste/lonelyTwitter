@@ -8,16 +8,19 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import io.searchbox.client.JestResult;
+import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 
 /**
  * Created by romansky on 10/20/16.
  */
 public class ElasticsearchTweetController {
+    private static final String TAG = "ElasticsearchController";
     private static JestDroidClient client;
 
     public static void verifySettings() {
@@ -36,25 +39,23 @@ public class ElasticsearchTweetController {
         @Override
         protected ArrayList<Tweet> doInBackground(String... search_parameters) {
             verifySettings();
-
-            ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-            Search.Builder search = new Search.Builder(search_parameters[search_parameters.length-1]);
-                    // TODO Build the query
-
+            Log.i(TAG, "Elastic search parameters: " + Arrays.toString(search_parameters));
+            ArrayList<Tweet> tweets = new ArrayList<>();
+            Search search = new Search.Builder(search_parameters[0])
+                    .addIndex("nklapste-wednesday")
+                    .addType("tweet")
+                    .build();
             try {
-                SearchResult elasticRs = client.execute(search.build());
-               // TODO get the results of the query
-                List<SearchResult.Hit<Tweet, Void>> hits = elasticRs.getHits(Tweet.class);
-                for (SearchResult.Hit<Tweet, Void> hit : hits) {
-                    Tweet tweet = hit.source;
-                    System.out.println("Elastic hits: " + tweet.getMessage());
+                JestResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<NormalTweet> tweetList;
+                    tweetList = result.getSourceAsObjectList(NormalTweet.class);
+                    Log.d(TAG, "obtained tweets: " + tweetList.toString());
+                    tweets.addAll(tweetList);
                 }
-
+            } catch (Exception e) {
+                Log.e(TAG, "Something went wrong when we tried to communicate with the elasticsearch server!", e);
             }
-            catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-            }
-
             return tweets;
         }
     }
@@ -64,17 +65,17 @@ public class ElasticsearchTweetController {
 
         @Override
         protected Void doInBackground(NormalTweet... tweets) {
-            //verifySettings();
-
+            verifySettings();
             for (NormalTweet tweet : tweets) {
-                Index index = new Index.Builder(tweet).index("testing").type("tweet").build();
-
+                Index index = new Index.Builder(tweet).index("nklapste-wednesday").type("tweet").build();
                 try {
-                    // where is the client?
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        tweet.setTweetID(result.getId());
+                    }
                 } catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the tweets");
+                    Log.e(TAG, "The application failed to build and send the tweets", e);
                 }
-
             }
             return null;
         }

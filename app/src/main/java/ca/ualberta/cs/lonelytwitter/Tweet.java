@@ -3,6 +3,7 @@ package ca.ualberta.cs.lonelytwitter;
 import java.util.Date;
 
 public abstract class Tweet implements Tweetable {
+    private String id;
     private String message;
     private Date date;
 
@@ -14,6 +15,10 @@ public abstract class Tweet implements Tweetable {
     public Tweet(String message, Date date) {
         this.message = message;
         this.date = date;
+    }
+
+    public void setTweetID(String id) {
+        this.id = id;
     }
 
     @Override
