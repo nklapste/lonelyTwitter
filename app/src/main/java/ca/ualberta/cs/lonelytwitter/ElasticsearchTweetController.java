@@ -59,9 +59,7 @@ class ElasticsearchTweetController {
         }
     }
 
-    // TODO we need a function which adds tweets to elastic search
     public static class AddTweetsTask extends AsyncTask<NormalTweet, Void, Void> {
-
         @Override
         protected Void doInBackground(NormalTweet... tweets) {
             verifySettings();

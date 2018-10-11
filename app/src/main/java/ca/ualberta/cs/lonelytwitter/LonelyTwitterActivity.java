@@ -40,7 +40,6 @@ public class LonelyTwitterActivity extends Activity {
             }
         });
 
-        // TODO: update to search functionality
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 tweetList.clear();
@@ -52,8 +51,6 @@ public class LonelyTwitterActivity extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                // TODO get result from aysc task and set it in tweetlist
                 setResult(RESULT_OK);
                 adapter.notifyDataSetChanged();
             }
@@ -62,7 +59,6 @@ public class LonelyTwitterActivity extends Activity {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
         try {
             tweetList = new ElasticsearchTweetController.GetTweetsTask().execute("").get();
