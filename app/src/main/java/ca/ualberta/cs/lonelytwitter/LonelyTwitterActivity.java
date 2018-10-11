@@ -45,7 +45,13 @@ public class LonelyTwitterActivity extends Activity {
             public void onClick(View v) {
                 tweetList.clear();
                 ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
-                getTweetsTask.execute(bodyText.getText().toString());
+                try {
+                    tweetList = getTweetsTask.execute(bodyText.getText().toString()).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 // TODO get result from aysc task and set it in tweetlist
                 setResult(RESULT_OK);

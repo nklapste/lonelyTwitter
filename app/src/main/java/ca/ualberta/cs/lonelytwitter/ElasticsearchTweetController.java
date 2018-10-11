@@ -19,11 +19,11 @@ import io.searchbox.core.Search;
 /**
  * Created by romansky on 10/20/16.
  */
-public class ElasticsearchTweetController {
+class ElasticsearchTweetController {
     private static final String TAG = "ElasticsearchController";
     private static JestDroidClient client;
 
-    public static void verifySettings() {
+    static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
@@ -34,7 +34,6 @@ public class ElasticsearchTweetController {
         }
     }
 
-    // TODO we need a function which gets tweets from elastic search
     public static class GetTweetsTask extends AsyncTask<String, Void, ArrayList<Tweet>> {
         @Override
         protected ArrayList<Tweet> doInBackground(String... search_parameters) {
