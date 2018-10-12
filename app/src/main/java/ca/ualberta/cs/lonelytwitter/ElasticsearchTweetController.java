@@ -38,9 +38,9 @@ class ElasticsearchTweetController {
         @Override
         protected ArrayList<Tweet> doInBackground(String... search_parameters) {
             verifySettings();
-            Log.i(TAG, "Elastic search parameters: " + Arrays.toString(search_parameters));
+            Log.d(TAG, "Elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Tweet> tweets = new ArrayList<>();
-            Search search = new Search.Builder(search_parameters[0])
+            Search search = new Search.Builder(Arrays.toString(search_parameters))
                     .addIndex("nklapste-wednesday")
                     .addType("tweet")
                     .build();

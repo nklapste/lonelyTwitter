@@ -2,6 +2,7 @@ package ca.ualberta.cs.lonelytwitter;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class LonelyTwitterActivity extends Activity {
-    private static final String FILENAME = "file.sav";
+    private static final String TAG = "LonelyTwitterActivity";
 
     private EditText bodyText;
     private ListView oldTweetsList;
@@ -43,13 +44,12 @@ public class LonelyTwitterActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 tweetList.clear();
-                ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
                 try {
-                    tweetList = getTweetsTask.execute(bodyText.getText().toString()).get();
+                    tweetList = new ElasticsearchTweetController.GetTweetsTask().execute(bodyText.getText().toString()).get();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Failed to run search", e);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Failed to run search", e);
                 }
                 setResult(RESULT_OK);
                 adapter.notifyDataSetChanged();
@@ -63,9 +63,9 @@ public class LonelyTwitterActivity extends Activity {
         try {
             tweetList = new ElasticsearchTweetController.GetTweetsTask().execute("").get();
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Failed to get initial tweetList!", e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Failed to get initial tweetList!", e);
         }
         adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweetList);
         oldTweetsList.setAdapter(adapter);
