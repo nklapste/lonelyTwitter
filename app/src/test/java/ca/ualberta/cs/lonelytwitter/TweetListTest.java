@@ -30,6 +30,7 @@ public class TweetListTest {
         mTweetList.addTweet(testTweet);
         Tweet getTweet = mTweetList.get(0);
         assertEquals(testTweet.getDate(), getTweet.getDate());
+        assertEquals(testTweet.getMessage(), getTweet.getMessage());
     }
 
     @Test
