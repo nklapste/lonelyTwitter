@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by wz on 14/09/15.
  */
-public class TestTest {
+public class ExampleUnitTest {
 
     @Test
     public void testFooSuccess() {
