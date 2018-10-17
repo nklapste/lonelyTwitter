@@ -86,9 +86,6 @@ public class LonelyTwitterActivity extends Activity {
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             tweetList = new ArrayList<Tweet>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
         }
     }
 
