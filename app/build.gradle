@@ -14,10 +14,10 @@ android {
         // If set to 'true', enables the instrumentation class to start and stop profiling.
         // If set to false (default), profiling occurs the entire time the instrumentation
         // class is running.
-        testHandleProfiling true
+//        testHandleProfiling true
         // If set to 'true', indicates that the Android system should run the instrumentation
         // class as a functional test. The default value is 'false'
-        testFunctionalTest true
+//        testFunctionalTest true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
