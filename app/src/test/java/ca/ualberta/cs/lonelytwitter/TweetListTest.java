@@ -25,6 +25,22 @@ public class TweetListTest {
     }
 
     @Test
+    public void getTweet(){
+        Tweet testTweet = getTestTweet();
+        mTweetList.addTweet(testTweet);
+        Tweet getTweet = mTweetList.get(0);
+        assertEquals(testTweet.getDate(), getTweet.getDate());
+    }
+
+    @Test
+    public void deleteTweet(){
+        Tweet testTweet = getTestTweet();
+        mTweetList.addTweet(testTweet);
+        assertTrue(mTweetList.deleteTweet(testTweet));
+        assertTrue(mTweetList.isEmpty());
+    }
+
+    @Test
     public void addTweet() {
         Tweet testTweet = getTestTweet();
         mTweetList.add(testTweet);

@@ -19,6 +19,14 @@ public class TweetList extends ArrayList<Tweet> {
         }
     }
 
+    public Tweet getTweet(int index) {
+        return this.get(index);
+    }
+
+    public boolean deleteTweet(Tweet tweet){
+        return this.remove(tweet);
+    }
+
     public int getCount(){
         return this.size();
     }
