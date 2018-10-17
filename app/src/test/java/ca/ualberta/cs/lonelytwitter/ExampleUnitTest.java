@@ -11,11 +11,6 @@ public class ExampleUnitTest {
 
     @Test
     public void testFooSuccess() {
-        assertEquals("1","1");
-    }
-
-    @Test
-    public void testFooFail() {
-        assertEquals("1","2");
+        assertEquals("1", "1");
     }
 }
