@@ -23,7 +23,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class LonelyTwitterActivity extends Activity {
-
     private static final String FILENAME = "file.sav";
     private EditText bodyText;
     private ListView oldTweetsList;
