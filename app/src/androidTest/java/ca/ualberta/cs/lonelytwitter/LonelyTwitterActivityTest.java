@@ -61,6 +61,6 @@ public class LonelyTwitterActivityTest extends ActivityTestRule<LonelyTwitterAct
         solo.clearEditText(editText);
         solo.clickInList(1);
         solo.assertCurrentActivity("Wrong activity", EditTweetActivity.class);
-        Assert.assertTrue(solo.searchText("Robotium"));
+        assertTrue(solo.searchText("Robotium"));
     }
 }
