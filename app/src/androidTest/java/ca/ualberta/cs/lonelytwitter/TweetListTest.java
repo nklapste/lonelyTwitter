@@ -1,11 +1,17 @@
 package ca.ualberta.cs.lonelytwitter;
 
-import android.test.ActivityInstrumentationTestCase2;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import static org.junit.Assert.*;
 
 /**
  * Created by makepeac on 9/29/16.
  */
-public class TweetListTest extends ActivityInstrumentationTestCase2 {
+@RunWith(AndroidJUnit4.class)
+public class TweetListTest extends ActivityTestRule<LonelyTwitterActivity> {
 
     public TweetListTest(){
         super(ca.ualberta.cs.lonelytwitter.LonelyTwitterActivity.class);
@@ -18,6 +24,7 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         assertTrue(tweets.hasTweet(tweet));
     }
 
+    @Test
     public void testDelete(){
         TweetList list = new TweetList();
         Tweet tweet = new NormalTweet("test");
@@ -26,6 +33,7 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         assertFalse(list.hasTweet(tweet));
     }
 
+    @Test
     public void testGetTweet(){
         TweetList tweets = new TweetList(); //
         Tweet tweet = new NormalTweet("test");
@@ -34,6 +42,7 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         assertEquals(returnedTweet.getMessage(), tweet.getMessage());
     }
 
+    @Test
     public void testHasTweet(){
         TweetList list = new TweetList();
         Tweet tweet = new NormalTweet("test");

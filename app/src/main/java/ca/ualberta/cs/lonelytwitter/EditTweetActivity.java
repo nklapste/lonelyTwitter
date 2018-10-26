@@ -14,7 +14,10 @@ public class EditTweetActivity extends Activity {
         setContentView(R.layout.activity_edit_tweet);
         Intent intent = getIntent();
         String tweetMessage = intent.getStringExtra("message");
+        String tweetDate = intent.getStringExtra("date");
         TextView messageTextView = findViewById(R.id.editTweetMessage);
+        TextView dateTextView = findViewById(R.id.editTweetDate);
         messageTextView.setText(tweetMessage);
+        dateTextView.setText(tweetDate);
     }
 }

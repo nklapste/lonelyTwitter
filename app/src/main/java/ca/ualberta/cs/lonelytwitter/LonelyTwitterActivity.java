@@ -60,6 +60,7 @@ public class LonelyTwitterActivity extends Activity {
 						Tweet selectedTweet = tweetList.get(position);
 						Intent intent = new Intent(LonelyTwitterActivity.this, EditTweetActivity.class);
 						intent.putExtra("message", selectedTweet.getMessage());
+						intent.putExtra("date", selectedTweet.getDate());
 						startActivity(intent);
 					}
 				}
