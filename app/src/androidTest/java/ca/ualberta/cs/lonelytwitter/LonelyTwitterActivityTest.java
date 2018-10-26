@@ -40,11 +40,12 @@ public class LonelyTwitterActivityTest extends ActivityTestRule<LonelyTwitterAct
 
     @Test
     public void testTweet(){
-        solo.assertCurrentActivity("wrong activity", "LonelyTwitterActivity");
+        solo.assertCurrentActivity("wrong activity", LonelyTwitterActivity.class);
     }
 
     @Test
     public void testAddTweet(){
+        solo.clickOnButton("Clear");
         solo.enterText((EditText) solo.getView(R.id.body), "new thing");
         solo.clickOnButton("Save");
         solo.clearEditText((EditText) solo.getView(R.id.body));
