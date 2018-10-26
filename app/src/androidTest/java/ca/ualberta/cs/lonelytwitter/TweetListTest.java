@@ -17,6 +17,7 @@ public class TweetListTest extends ActivityTestRule<LonelyTwitterActivity> {
         super(ca.ualberta.cs.lonelytwitter.LonelyTwitterActivity.class);
     }
 
+    @Test
     public void testAddTweet(){
         TweetList tweets = new TweetList();
         Tweet tweet = new NormalTweet("adding tweet");
