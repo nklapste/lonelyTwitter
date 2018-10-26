@@ -13,8 +13,10 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +53,18 @@ public class LonelyTwitterActivity extends Activity {
 				saveInFile();
 			}
 		});
+		oldTweetsList.setOnItemClickListener(
+				new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						Tweet selectedTweet = tweetList.get(position);
+						Intent intent = new Intent(LonelyTwitterActivity.this, EditTweetActivity.class);
+						intent.putExtra("message", selectedTweet.getMessage());
+						startActivity(intent);
+					}
+				}
+		);
+
 	}
 
 	@Override
@@ -75,9 +89,6 @@ public class LonelyTwitterActivity extends Activity {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			tweetList = new ArrayList<Tweet>();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException();
 		}
 	}
 

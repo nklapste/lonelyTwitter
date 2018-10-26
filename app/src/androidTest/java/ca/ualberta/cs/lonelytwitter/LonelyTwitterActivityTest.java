@@ -50,4 +50,17 @@ public class LonelyTwitterActivityTest extends ActivityTestRule<LonelyTwitterAct
         solo.clearEditText((EditText) solo.getView(R.id.body));
         assertTrue(solo.waitForText("new thing"));
     }
+
+    @Test
+    public void testEditTweet() {
+        solo.clickOnButton("Clear");
+        solo.assertCurrentActivity("Wrong activity", LonelyTwitterActivity.class);
+        EditText editText = (EditText) getActivity().findViewById(R.id.body);
+        editText.setText("Robotium");
+        solo.clickOnButton("Save");
+        solo.clearEditText(editText);
+        solo.clickInList(1);
+        solo.assertCurrentActivity("Wrong activity", EditTweetActivity.class);
+        Assert.assertTrue(solo.searchText("Robotium"));
+    }
 }
